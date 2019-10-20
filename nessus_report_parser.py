@@ -1,3 +1,7 @@
+# Nessus exports the scan results in SCAP format. This is when using its API through pyTenable python module
+# sc.scan_instances.export_scan(scan_id), file_object)
+# the result of above method is a ZIP file containg the Nessus report in SCAP (XML) format
+
 import xmltodict
 import xml.etree.ElementTree as ET
 
