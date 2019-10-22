@@ -18,23 +18,42 @@ description:
 version_added: "2.4"
 author: Jesus Fonteboa (#hiperesfera in GitHub)
 options:
-    scan_location:
+    scan_name:
         description:
-            - Location of the Nessus scan report
+            - Nessus.sc scan name
+        required: true
+    severity:
+        description:
+            - To filter the report by serverity
+        required: true
+    server:
+        description:
+            - Nessus.sc server name
+        required: true
+    username:
+        description:
+            - username with perms to fetch reports from Nessus.sc server
+        required: true
+    password:
+        description:
+            - username password
         required: true
 notes:
     - work in progress 
-    - this module still needs a lot of error checking/handling and integration with Nessus.sc via pyTanable module
-    - At the moment, it relies in having the Nessus scan in a local file
+    - this module still needs a lot of error checking/handling and integration with Nessus.sc via pyTenable module
 requirements:
-    - Requires the following module to be installed 'pyTenable'
+    - Requires the following module to be installed pyTenable
     - Tested with Ansible 2.8.6 version and Python 2.7.16
 '''
 
 EXAMPLES = '''
 - name: Fetch and parse Nessus.sc scan results
   nessus-scan-results 
-      scan_location: "./nessus_report.xml"
+      scan_name: "DMZ Servers"
+      severity: 2
+      server: nessus.sc 
+      username: api_nessus
+      password: *****
   register: output
 '''
 
@@ -43,7 +62,7 @@ changed:
     description: If changed or not (true if results completed)
     type: bool
 output:
-    description: Nessus scan results extracted from the SCAP file and formated in JSON 
+    description: Nessus scan results per machine and filter by criticality in JSON format
     type: JSON
 '''
 
